@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+
+{% if user.is_authenticated %}
+
+  <table class="table table-hover table-striped table-bordered ">
+    <thead>
+      <tr>
+        <th scope="col">Код</th>
+        <th scope="col">Имя</th>
+        <th scope="col">Номер</th>
+        <th scope="col">Почта</th>
+        <th scope="col">Адрес</th>
+        <th scope="col">Пакет диеты</th>
+        <th scope="col">Медицинские требования</th>
+        <th scope="col">Дата добавления</th>
+      </tr>
+    </thead>
+    <tbody>
+    <h1>Клиенты</h1>
+    {% if clients %}
+      {% for client in clients %}
+      <tr>
+        <td>{{ client.client_id}}</td>
+        <td>{{ client.first_name }} {{ client.last_name }}</td>
+        <td>{{ client.phone_number}}</td>
+        <td>{{ client.email }}</td>
+        <td>{{ client.address }}</td>
+        <td>{{ client.dietary_needs }}</td>
+        <td>{{ client.medical_conditions }}</td>
+        <td>{{ client.date_added }}</td>
+      </tr>
+      {% endfor %}
+    {% endif %}
+    </tbody>
+    </table>
+
+  {% if user.username == 'admin' %}
+    <script>
+     window.location.href = "http://127.0.0.1:8000/admin/";
+    </script>
+  {% endif %}
+  
+{% else %}
+
+<h1>Войти</h1>
+</br>
+
+<form method="POST" action="{% url 'home' %}">
+	{% csrf_token %}
+
+  <div class="mb-3">
+    <input type="text" class="form-control" name="username", placeholder="Имя пользователя" required>
+    
+  </div><br/>
+  <div class="mb-3">
+    <input type="password" class="form-control" name="password", placeholder="Пароль" required>
+  </div>
+  <br/>
+  <button type="submit" class="btn btn-secondary">Войти</button>
+
+</form>
+
+</div>
+{% endif %}
+{% endblock %}
