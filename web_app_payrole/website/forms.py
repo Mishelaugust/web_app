@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
+from .models import Client
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label='', widget= forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
@@ -41,3 +42,18 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Введите тот же пароль, что и раньше, для проверки.</small></span>'	
 
+
+
+# Create adding the record
+class AddRecordForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        exclude = ("user",)
+
+    first_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Имя", "class":"form-control"}), label="")
+    last_name = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Фамилия", "class":"form-control"}), label="")
+    email = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Email", "class":"form-control"}), label="")
+    phone_number = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Номер", "class":"form-control"}), label="")
+    address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Адрес", "class":"form-control"}), label="")
+    dietary_needs = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Пакет", "class":"form-control"}), label="")
+    #medical_condition = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"мед. требования", "class":"form-control"}), label="")  

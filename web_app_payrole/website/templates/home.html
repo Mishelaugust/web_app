@@ -23,7 +23,7 @@
     {% if clients %}
       {% for client in clients %}
       <tr>
-        <td>{{ client.client_id}}</td>
+        <td><a href="{%url 'record'  client.client_id%}" class="link-dark">{{ client.client_id}}</a></td>
         <td>{{ client.first_name }} {{ client.last_name }}</td>
         <td>{{ client.phone_number}}</td>
         <td>{{ client.email }}</td>
@@ -45,6 +45,7 @@
   
 {% else %}
 
+<div class="col-md-6 offset-md-3">
 <h1>Войти</h1>
 </br>
 

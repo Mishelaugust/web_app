@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+      Клиент
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ managers_record }}</h5>
+      <p class="card-text">
+        <strong>Код</strong>: {{ managers_record.client_id}}</br>
+        <strong>Номер:</strong> {{ managers_record.phone_number}}</br>  
+        <strong>Email:</strong> {{ managers_record.email }}</br>
+        <strong>Адрес:</strong> {{ managers_record.address }}</br>
+        <strong>Пакет:</strong> {{ managers_record.dietary_needs }}</br>
+        <strong>Мед.требования:</strong> {{ managers_record.medical_conditions }}</br>
+        <strong>Дата добавления:</strong> {{ managers_record.date_added }}</br>
+      </p>
+
+    </div>
+    
+  </div>
+</br>
+  <a class="btn btn-outline-dark" href="{% url 'home' %}" role="button">Назад</a>
+  <a class="btn btn-outline-danger" href="{% url 'delete' managers_record.client_id %}" role="button">Удалить</a>
+
+{% endblock %}
