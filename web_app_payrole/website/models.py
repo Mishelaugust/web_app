@@ -1,4 +1,7 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Client(models.Model):
     client_id = models.AutoField(primary_key=True)
@@ -13,3 +16,19 @@ class Client(models.Model):
     
     def __str__(self):
         return(f"{self.first_name} {self.last_name}")
+    
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    job_titles = (
+        ('mg','Менеджер'),
+        ('dd','водитель доставщик')
+    )
+    branches = (
+        ('s','Отдел продаж'),
+        ('d','Отдел доставки')
+    )
+    job_title = models.CharField(max_length=2, choices=job_titles,default='')
+    branch = models.CharField(max_length=1,choices=branches,default='')
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+    salary = models.DecimalField(max_digits=10, decimal_places=2)
+

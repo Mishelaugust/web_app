@@ -1,12 +1,14 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Client
+from .models import Client, Profile
+
 
 class SignUpForm(UserCreationForm):
     email = forms.EmailField(label='', widget= forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
     first_name = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name'}))
     last_name = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name'}))
+    
 
     class Meta:
         model = User
@@ -42,6 +44,22 @@ class SignUpForm(UserCreationForm):
         self.fields['password2'].label = ''
         self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Введите тот же пароль, что и раньше, для проверки.</small></span>'	
 
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model = Profile
+        fields = ('job_title', 'branch')
+
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['job_title'].widget.attrs['class'] = 'form-control'
+        self.fields['job_title'].widget.attrs['placeholder'] = 'Рабочая должность:'
+        self.fields['job_title'].label = ''
+
+        self.fields['branch'].widget.attrs['class'] = 'form-control'
+        self.fields['branch'].widget.attrs['placeholder'] = 'Отдел:'
+        self.fields['branch'].label = ''
 
 
 # Create adding the record
