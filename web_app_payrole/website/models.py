@@ -32,3 +32,11 @@ class Profile(models.Model):
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
     salary = models.DecimalField(max_digits=10, decimal_places=2)
 
+
+class Salary(models.Model):
+    job_titles = (
+        ('mg','Менеджер'),
+        ('dd','водитель доставщик')
+    )
+    salary_user = models.DecimalField(max_digits=10, decimal_places=2)
+    name_job_title = models.CharField(max_length=2, choices=job_titles,default='')

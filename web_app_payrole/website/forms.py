@@ -75,3 +75,18 @@ class AddRecordForm(forms.ModelForm):
     address = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Адрес", "class":"form-control"}), label="")
     dietary_needs = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"Пакет", "class":"form-control"}), label="")
     #medical_condition = forms.CharField(required=True, widget=forms.widgets.TextInput(attrs={"placeholder":"мед. требования", "class":"form-control"}), label="")  
+
+class UserUpdateForm(forms.ModelForm):
+    email = forms.EmailField(label='', widget= forms.TextInput(attrs={'class':'form-control', 'placeholder':'Почта'}))
+    first_name = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Имя'}))
+    last_name = forms.CharField(label='',max_length=100, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Фамилия'}))
+    
+    class Meta:
+        model = User
+        fields = ('last_name', 'first_name', 'email')
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('image',)
+    

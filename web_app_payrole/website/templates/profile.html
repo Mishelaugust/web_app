@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+
+
+<div class="card col-md-6 offset-md-3" style="width: 38rem;">
+    <h3 class="card-header">Ваш профиль:</h3>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <img src="{{ user.profile.image.url }}" class="card-img-top" alt="..." style="width: 17rem; height: 17rem;">
+        <div class="card-body">
+            {{p_form}}  
+            {{u_form}}  
+        </div>
+        <ul class="list-group list-group-flush">
+            
+        <li class="list-group-item">Должность: {{ user.profile.get_job_title_display }}</li>
+        <li class="list-group-item">Отдел: {{ user.profile.get_branch_display }}</li>
+        <li class="list-group-item">Наработка: {{ user.profile.salary }}</li>
+        <li class="list-group-item">Последний вход: {{ user.last_login }}</li>
+        </ul>
+        <div class="card-body">
+            <button type="submit" class="btn btn-outline-dark">Обновить профиль</button>
+            <a href="{% url 'home' %}" class="btn btn-outline-dark">Назад</a>
+        </div>
+    </form>
+  </div>
+{% endblock %}

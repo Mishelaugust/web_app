@@ -12,7 +12,8 @@ urlpatterns = [
     path('delete/<int:pk>', views.manager_delete_record, name = 'delete'),
     path('add/', views.manager_add_record, name = 'add'),
     path('update/<int:pk>', views.update_manager_record, name = 'update'),
-    path('profile/', )
+    path('profile/', views.profile, name = 'profile'),
+    path('deliver/', views.make_deliver, name = 'deliver')
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
