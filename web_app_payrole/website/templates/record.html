@@ -20,10 +20,15 @@
     </div>
     
   </div>
+ 
 </br>
+
   <a class="btn btn-outline-dark" href="{% url 'home' %}" role="button">Назад</a>
+{% if user.profile.branch == 's' %} 
   <a class="btn btn-outline-danger" href="{% url 'delete' managers_record.client_id %}" role="button">Удалить</a>
   <a class="btn btn-outline-primary" href="{% url 'update' managers_record.client_id %}" role="button">Редактировать</a>
-  
+{% else %}
+  <a class="btn btn-outline-success" href="{% url 'deliver' %}" role="button">Доставил</a>
+{% endif %}
 
 {% endblock %}

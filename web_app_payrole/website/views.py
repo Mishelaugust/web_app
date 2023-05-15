@@ -159,13 +159,13 @@ def make_deliver(request):
 	user_profile = Profile.objects.get(user=request.user)
 	num_salary = Salary.objects.get(name_job_title = 'dd')
 	if request.user.is_authenticated and request.user.profile.branch == 'd':
-		if request.method == 'POST':
-			
-			user_profile.salary += num_salary.salary_user
-				
-			messages.success(request, "Заказ доставлен!")
-			return redirect('home')
-		return render(request, 'record.html')
+		
+		user_profile.salary += num_salary.salary_user
+		user_profile.save()
+		messages.success(request, "Заказ доставлен!")
+		return redirect('home')
+		#return render(request, 'record.html')
 	else:
 		messages.success(request, "Вы не состоите в отделе доставок!")
 		return redirect('home')
+	
