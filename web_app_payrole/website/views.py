@@ -16,9 +16,11 @@ def home(request):
 		# Authenticate
 		user = authenticate(request, username=username, password=password)
 		if user is not None:
+			
 			login(request, user)
 			messages.success(request, "Вы вошли!")
 			return redirect('home')
+			
 		else:
 			messages.success(request, "Ошибка заполнения... Попробуйте ещё раз!")
 			return redirect('home')

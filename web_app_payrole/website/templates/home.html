@@ -3,8 +3,8 @@
 
 
 
-{% if user.is_authenticated and user.profile.branch is not None%}
-
+{% if user.is_authenticated %}
+  {%if user.profile%}
   <table class="table table-hover table-striped table-bordered ">
     <thead>
       <tr>
@@ -33,6 +33,7 @@
         <td>{{ client.date_added }}</td>
       </tr>
       {% endfor %}
+    {% endif %}
     {% endif %}
     </tbody>
     </table>
